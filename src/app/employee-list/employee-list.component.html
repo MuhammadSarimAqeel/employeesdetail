@@ -1,0 +1,58 @@
+<!--
+<div class="row">
+    <div class="col-md-8">
+<h2 class="text-center my-3">Employees List</h2>
+</div>
+
+<div class="col-md-4 mt-3">
+    <form class="d-flex" (ngSubmit)="onsearch()">
+        <input class="form-control me-2 mr-2" [(ngModel)]="employee.firstename" name="firstename" id="firstename" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success ml-1" type="submit">Search</button>
+      </form>
+
+     
+</div>
+
+</div>
+-->
+<input class="form-control me-2 mt-3 mr-2" [(ngModel)]="firstName" (ngModelChange)="search()" name="firstname" id="firstname" type="search" placeholder="Search Employee here" aria-label="Search">
+<table class="table mt-2">
+<thead class="thead-dark">
+<tr>
+    
+<th scope="col" (click) = "sort('firstename')">First name&nbsp;<i class="fa fa-sort ml-2"></i></th>
+<th scope="col">Last name</th>
+<th scope="col">Email</th>
+<th scope="col">Actions</th>
+</tr>
+
+
+
+</thead>
+
+<tbody>
+    
+<tr *ngFor = "let employee of employees | orderBy:key:reverse  | paginate : {itemsPerPage:5 , currentPage:p}; "   >
+   
+<td  (click)="viewemployee(employee.id)" >{{employee.firstename}} </td>
+<td  (click)="viewemployee(employee.id)" >{{employee.lastname}}</td>
+<td  (click)="viewemployee(employee.id)" ><a routerLink="#" (click)="getemployee(employee.id)">{{employee.email}}</a></td>
+<td>
+    <button (click)="viewemployee(employee.id)"  class="btn btn-info mr-2">View</button>
+    <button (click)="deleteemployee(employee.id)" class="btn btn-danger mr-2">Delete</button>
+    <button (click)="updateemployee(employee.id)" class="btn btn-primary">update</button>
+</td>
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+<div class="conatiner" style="margin-top: 25px;">
+<pagination-controls (pageChange)=" p =$event"></pagination-controls>
+</div>
